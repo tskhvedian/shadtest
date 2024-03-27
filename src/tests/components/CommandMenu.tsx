@@ -1,12 +1,5 @@
 import * as React from "react";
-import {
-  Calculator,
-  Calendar,
-  CreditCard,
-  Settings,
-  Smile,
-  User,
-} from "lucide-react";
+import { MapIcon } from "lucide-react";
 
 import {
   CommandDialog,
@@ -15,49 +8,39 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-  CommandSeparator,
-  CommandShortcut,
 } from "@/components/ui/command";
 
-export function CommandDialogDemo({ open, setOpen }: any) {
+const data = [
+  "Calendar",
+  "Search Emoji",
+  "GUN",
+  "24 search Emoji",
+  "24 Kote Meskhi Street",
+];
+
+export function CommandDialogDemo({ open, setOpen, setOriginAddress }: any) {
   return (
     <>
-      <CommandDialog open={open} onOpenChange={setOpen}>
+      <CommandDialog open={open} onOpenChange={setOpen} shouldFilter={false}>
         <CommandInput placeholder="Type a command or search..." />
         <CommandList>
-          <CommandEmpty>No results found.</CommandEmpty>
-          <CommandGroup heading="Suggestions">
-            <CommandItem>
-              <Calendar className="mr-2 h-4 w-4" />
-              <span>Calendar</span>
-            </CommandItem>
-            <CommandItem>
-              <Smile className="mr-2 h-4 w-4" />
-              <span>Search Emoji</span>
-            </CommandItem>
-            <CommandItem>
-              <Calculator className="mr-2 h-4 w-4" />
-              <span>Calculator</span>
-            </CommandItem>
-          </CommandGroup>
-          <CommandSeparator />
-          <CommandGroup heading="Settings">
-            <CommandItem>
-              <User className="mr-2 h-4 w-4" />
-              <span>Profile</span>
-              <CommandShortcut>⌘P</CommandShortcut>
-            </CommandItem>
-            <CommandItem>
-              <CreditCard className="mr-2 h-4 w-4" />
-              <span>Billing</span>
-              <CommandShortcut>⌘B</CommandShortcut>
-            </CommandItem>
-            <CommandItem>
-              <Settings className="mr-2 h-4 w-4" />
-              <span>Settings</span>
-              <CommandShortcut>⌘S</CommandShortcut>
-            </CommandItem>
-          </CommandGroup>
+          <CommandEmpty>No addrress found.</CommandEmpty>
+
+          {data?.map((item, index) => (
+            <CommandGroup
+              onClick={() => {
+                console.log("Clicked", item);
+                setOriginAddress(item)
+                
+              }}
+              key={index}
+            >
+              <CommandItem>
+                <MapIcon className="mr-2 h-4 w-4" />
+                <span>{item}</span>
+              </CommandItem>
+            </CommandGroup>
+          ))}
         </CommandList>
       </CommandDialog>
     </>

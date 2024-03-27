@@ -7,6 +7,7 @@ import { CommandInput } from "./components/ui/command";
 function App() {
   const [isLoading, setIsLoading] = React.useState(true);
   const [open, setOpen] = React.useState(false);
+  const [originAddress, setOriginAddress] = React.useState("");
 
   // Simulate changing isLoading and stopping progress after 2 seconds
   React.useEffect(() => {
@@ -23,6 +24,8 @@ function App() {
       </div>
     );
 
+  console.log("Origin AddressL ", originAddress);
+
   return (
     <div className="w-full h-screen flex flex-col items-center justify-center space-y-2">
       <Input
@@ -34,7 +37,11 @@ function App() {
         placeholder="Search address..."
       />
 
-      <CommandDialogDemo open={open} setOpen={setOpen} />
+      <CommandDialogDemo
+        open={open}
+        setOpen={setOpen}
+        setOriginAddress={setOriginAddress}
+      />
     </div>
   );
 }
